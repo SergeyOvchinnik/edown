@@ -86,8 +86,6 @@ brstrip(Str) -> re:replace(Str, "\\s+\\s\$", "", [global, multiline]).
 	false ->
 	    '#element#'(tt, Data, Attrs, Parents, E)
     end;
-'#element#'('pre', Data, Attrs, Parents, E) ->
-    xmerl_html:'#element#'('pre', Data, Attrs, Parents, E);
 '#element#'('div', Data, _, _Parents, _E) ->
     %% special case - we use 'div' to enforce html encoding
     Data;
@@ -195,6 +193,7 @@ md_elem(Tag, Data, Attrs, Parents, E) ->
 	h4 -> ["\n\n####", no_nl(Data), "##\n"];
 	hr -> "---------\n";
 	head -> [];
+        pre -> ["\n\n```\n", Data, "\n```"];
 	_ ->
 		    ["\n",
 		     xmerl_lib:start_tag(Tag,Attrs),
