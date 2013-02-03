@@ -167,7 +167,7 @@ md_elem(Tag, Data, Attrs, Parents, E) ->
 	'div' -> Data;
 	ul    -> Data;
 	ol    -> Data;
-	p     -> ["\n\n", Data];
+	p     -> ["\n", Data, "\n"];
 	b     -> ["__", no_nl(Data), "__"];
 	em    -> ["_", no_nl(Data), "_"];
 	i     -> ["_", no_nl(Data), "_"];
@@ -193,7 +193,7 @@ md_elem(Tag, Data, Attrs, Parents, E) ->
 	h4 -> ["\n\n#### ", no_nl(Data), " ####\n"];
 	hr -> "---------\n";
 	head -> [];
-        pre -> ["\n\n```\n", Data, "\n```"];
+        pre -> ["\n```\n", Data, "\n```\n"];
 	_ ->
 		    ["\n",
 		     xmerl_lib:start_tag(Tag,Attrs),
